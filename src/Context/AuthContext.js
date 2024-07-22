@@ -30,8 +30,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const clearCookies = () => {
+    // Clear cookies by setting their expiration date to a past date
+    document.cookie.split(";").forEach((cookie) => {
+      const [name] = cookie.split("=");
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;`;
+    });
+  };
+
   const logOut = async () => {
     await axiosInstance.post("user/logout");
+
+    clearCookies();
 
     setUser(null);
     navigate("/");
