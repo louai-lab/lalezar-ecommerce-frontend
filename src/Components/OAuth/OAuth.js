@@ -30,8 +30,8 @@ const OAuth = ({ isLogin }) => {
           image: result.user.photoURL,
         },
       });
-      // setUser(response);
-      setUser(response.data);
+      // console.log(response);
+      setUser(response);
       await fetchUserData();
       navigate("/");
     } catch (error) {

@@ -16,7 +16,7 @@ import { useLanguage } from "../../Utils/LanguageContext";
 
 function Navbar() {
   const [collapesed, setCollapsed] = useState(false);
-  const { user, logOut } = useContext(AuthContext);
+  const { user, setUser, logOut } = useContext(AuthContext);
   const { cartItemCount, setCartItemCount } = useContext(CartContext);
   const [profOpen, setProfileOpen] = useState(false);
 
@@ -151,7 +151,7 @@ function Navbar() {
             {!user && (
               <ul className={Styles.linksWrapper}>
                 <li>
-                  <Stack spacing={2} direction="row"> 
+                  <Stack spacing={2} direction="row">
                     <Button
                       onClick={goToLoginPage}
                       variant="outlined"
@@ -253,6 +253,7 @@ function Navbar() {
                       <li className={Styles.profileLi}>
                         <Button
                           variant="outlined"
+                          // onClick={() => logOut()}
                           onClick={() => logOut()}
                           sx={{
                             padding: "0.7rem 1.5rem",
