@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userUpdated, setUserUpdated] = useState(false);
   const navigate = useNavigate();
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     if (!user && user === null) {
@@ -31,10 +31,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logOut = async () => {
-    const response = await axiosInstance.post("user/logout");
+    const response = await axiosInstance.post(
+      "user/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
 
     if (response) {
-      console.log("cleared as welll");
+      console.log("Log out successfully");
       setUser(null);
       navigate("/");
     }

@@ -151,7 +151,7 @@ function Navbar() {
             {!user && (
               <ul className={Styles.linksWrapper}>
                 <li>
-                  <Stack spacing={2} direction="row">
+                  <Stack spacing={2} direction="row"> 
                     <Button
                       onClick={goToLoginPage}
                       variant="outlined"
