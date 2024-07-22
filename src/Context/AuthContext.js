@@ -30,36 +30,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // const logOut = async () => {
-  //   const response = await axiosInstance.post("user/logout");
-
-  //   if (response) {
-  //     // console.log("cleared as welll");
-  //     setUser(null);
-  //     navigate("/");
-  //   }
-  // };
-
   const logOut = async () => {
-    try {
-      console.log("Sending logout request");
-      await axiosInstance.post(
-        "user/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("Logout request successful");
-      localStorage.removeItem("token");
-      sessionStorage.removeItem("token");
-      setUser(null);
-      navigate("/");
-    } catch (error) {
-      console.error("Logout error", error);
-    }
-  };
+    await axiosInstance.post("user/logout");
 
+    setUser(null);
+    navigate("/");
+  };
   return (
     <AuthContext.Provider
       value={{
