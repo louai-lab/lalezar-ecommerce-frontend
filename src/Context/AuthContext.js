@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userUpdated, setUserUpdated] = useState(false);
   const navigate = useNavigate();
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     if (!user && user === null) {
@@ -30,15 +30,36 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logOut = async () => {
-    const response = await axiosInstance.post("user/logout");
+  // const logOut = async () => {
+  //   const response = await axiosInstance.post("user/logout");
 
-    if (response) {
-      console.log("cleared as welll");
+  //   if (response) {
+  //     // console.log("cleared as welll");
+  //     setUser(null);
+  //     navigate("/");
+  //   }
+  // };
+
+  const logOut = async () => {
+    try {
+      console.log("Sending logout request");
+      await axiosInstance.post(
+        "user/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("Logout request successful");
+      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       setUser(null);
       navigate("/");
+    } catch (error) {
+      console.error("Logout error", error);
     }
   };
+
   return (
     <AuthContext.Provider
       value={{
