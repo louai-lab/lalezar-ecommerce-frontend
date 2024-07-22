@@ -63,7 +63,7 @@ const ClientModal = ({
     } catch (error) {
       setLoading(false);
       setError(true);
-      toast.error(`An Error Occured`);
+      toast.error(`An Error Occured!`);
       console.log(error);
     }
   };
