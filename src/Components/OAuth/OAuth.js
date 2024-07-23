@@ -19,7 +19,7 @@ const OAuth = ({ isLogin }) => {
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      console.log("result before api call", result.user.email);
+      // console.log("result before api call", result.user.email);
 
       const response = await apiCall({
         url: `${process.env.REACT_APP_BACKEND_ENDPOINT}user/google`,
@@ -32,7 +32,7 @@ const OAuth = ({ isLogin }) => {
       });
 
       if (response) {
-        console.log("response from backend", response);
+        // console.log("response from backend", response);
         setUser(response);
         await fetchUserData();
       }
