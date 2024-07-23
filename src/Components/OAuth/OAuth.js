@@ -19,7 +19,7 @@ const OAuth = ({ isLogin }) => {
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      // console.log(result);
+      console.log("result before api call", result.user.email);
 
       const response = await apiCall({
         url: `${process.env.REACT_APP_BACKEND_ENDPOINT}user/google`,
@@ -30,9 +30,12 @@ const OAuth = ({ isLogin }) => {
           image: result.user.photoURL,
         },
       });
-      // console.log(response);
-      setUser(response);
-      await fetchUserData();
+
+      if (response) {
+        console.log("response from backend", response);
+        setUser(response);
+        await fetchUserData();
+      }
       navigate("/");
     } catch (error) {
       console.log("could not sign in with google", error);
