@@ -72,6 +72,7 @@ function Footer() {
                   <FacebookRoundedIcon />
                 </Link>
                 <Link to="www.Instagram.com" className={`${styles.socialIcon}`}>
+                {/* https://www.instagram.com/lalezarspices/ */}
                   <InstagramIcon />
                 </Link>
                 <Link to="" className={`${styles.socialIcon}`}>

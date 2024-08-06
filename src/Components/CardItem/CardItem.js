@@ -6,11 +6,13 @@ import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 export default function CardItem({
   id,
   setTotalPrice,
   name,
+  name_AR,
   quantity,
   price,
   color,
@@ -26,6 +28,10 @@ export default function CardItem({
   const handleDelete = () => {
     onDelete(id);
   };
+
+  // console.log(nameAr);
+
+  const { language } = useLanguage();
 
   useEffect(() => {
     setTotalPrice1(count * price);
@@ -83,7 +89,7 @@ export default function CardItem({
     const newCount = Number(e.target.value);
     if (newCount >= 1 || e.target.value === "") {
       setCount(newCount);
-      setEditQuantity(newCount)
+      setEditQuantity(newCount);
       setTotalPrice1(newCount * price);
       updateQuantityInLocalStorage(newCount);
     }
@@ -106,12 +112,13 @@ export default function CardItem({
               }}
               to={`/product/${slug}`}
             >
-              <img className={styles.img} src={image} alt={name}/>
+              <img className={styles.img} src={image} alt={name} />
             </Link>
           </div>
-          <p className={styles.title}>{name}</p>
+          <p className={styles.title}>{language === "en" ? name : name_AR}</p>
           <p className={styles.price}>{price}$</p>
         </div>
+        
         <div className={styles.bottom}>
           <div className={styles.countContainer}>
             <IconButton onClick={count > 0 ? handleDecrement : null}>

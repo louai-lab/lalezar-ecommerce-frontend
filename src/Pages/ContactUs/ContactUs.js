@@ -251,7 +251,7 @@ const ContactUs = () => {
                 : "نحن متواجدون 7 أيام في الأسبوع."}
             </p>
             <p className={styles.textHolder}>
-              {language === "en" ? "Phone:" : "الهاتف"} +961000000
+              {language === "en" ? "Phone:" : "الهاتف"} +961-6418210
             </p>
           </article>
           <article
@@ -282,12 +282,12 @@ const ContactUs = () => {
             </p>
             <p className={styles.textHolder}>
               {language == "en" ? "Emails:" : "رسائل البريد الإلكتروني:"}{" "}
-              customer@exclusive.com
+              info@lalezarspices.com{" "}
             </p>
-            <p className={styles.textHolder}>
+            {/* <p className={styles.textHolder}>
               {language == "en" ? "Emails:" : "رسائل البريد الإلكتروني:"}{" "}
               support@exclusive.com
-            </p>
+            </p> */}
           </article>
         </section>
       </main>

@@ -18,6 +18,7 @@ import { CartContext } from "../../Context/CartContext";
 import { useProductsStore } from "../../Zustand/Store.js";
 import { useCategoriesStore } from "../../Zustand/Store.js";
 import { useLanguage } from "../../Utils/LanguageContext.js";
+import { RevealLeft } from "../../RevealAnimationLeft.js";
 
 const Products = () => {
   const debounceTimeout = useRef(null);
@@ -33,7 +34,7 @@ const Products = () => {
   const [sidePanelWidth, setSidePanelWidth] = useState(400);
 
   const { getAllProducts } = useProductsStore();
-  const { products, productCount } = useProductsStore();
+  const { loading, products, productCount } = useProductsStore();
   const { categories } = useCategoriesStore();
 
   const { language } = useLanguage();
@@ -105,6 +106,7 @@ const Products = () => {
       const newItem = {
         id: product._id,
         name: product.name,
+        name_AR: product.name_AR,
         price: product.price,
         quantity: 1,
         slug: product.slug,
@@ -114,7 +116,11 @@ const Products = () => {
 
       currentItems.push(newItem);
       localStorage.setItem("cart", JSON.stringify(currentItems));
-      showToast(`${product.name} added successfully to your bag`);
+      showToast(
+        language === "en"
+          ? `${product.name} added successfully to your bag`
+          : `${product.name_AR} تمت إضافتها بنجاح إلى حقيبتك`
+      );
       setCartItems((prevCartItems) => [...prevCartItems, newItem]);
       increaseCartItem();
     } else {
@@ -163,57 +169,79 @@ const Products = () => {
           }}
         >
           <div>
-            <section className={StyleProducts.sideBarTitle}>
+            <section
+              className={
+                language == "en"
+                  ? StyleProducts.sideBarTitle
+                  : StyleProducts.sideBarTitleAr
+              }
+            >
               <Icon></Icon>
               <h1>{language === "en" ? "Categories" : "الفئات"}</h1>
             </section>
-            <Reveal>
-              <section className={StyleProducts.searchArticle}>
-                <article>
-                  <h3>
-                    {language === "en"
-                      ? "Find what you're looking for"
-                      : "اعثر على ما تبحث عنه"}
-                  </h3>
+            {/* <Reveal> */}
+            <section className={StyleProducts.searchArticle}>
+              <RevealLeft>
+                <h3 className={language === "en" ? "" : StyleProducts.find}>
+                  {language === "en"
+                    ? "Find what you're looking for"
+                    : "اعثر على ما تبحث عنه"}
+                </h3>
 
-                  <Stack
-                    className={StyleProducts.stack}
-                    sx={{ padding: "10px 0px" }}
-                  >
-                    <Autocomplete
-                      freeSolo
-                      id="free-solo-2-demo"
-                      disableClearable
-                      // options={products.map((product) => ({
-                      //   name: product.name,
-                      // }))}
-                      options={[]}
-                      getOptionLabel={(option) => option.name}
-                      renderInput={(params) => (
-                        <TextField
-                          className={`${StyleProducts.searchInput}`}
-                          {...params}
-                          label={language === "en" ? "Search input" : "ابحث"}
-                          InputProps={{
-                            ...params.InputProps,
-                            type: "search",
-                          }}
-                        />
-                      )}
-                      onChange={handleSearchInputChange}
-                      onInputChange={handleSearchInputChange}
-                    />
-                  </Stack>
-                </article>
-              </section>
-            </Reveal>
+                <Stack
+                  className={StyleProducts.stack}
+                  sx={{ padding: "10px 0px" }}
+                >
+                  <Autocomplete
+                    freeSolo
+                    id="free-solo-2-demo"
+                    disableClearable
+                    // options={products.map((product) => ({
+                    //   name: product.name,
+                    // }))}
+                    options={[]}
+                    getOptionLabel={(option) => option.name}
+                    renderInput={(params) => (
+                      <TextField
+                        className={`${StyleProducts.searchInput}`}
+                        {...params}
+                        label={language === "en" ? "Search input" : "ابحث"}
+                        InputProps={{
+                          ...params.InputProps,
+                          type: "search",
+                        }}
+                      />
+                    )}
+                    onChange={handleSearchInputChange}
+                    onInputChange={handleSearchInputChange}
+                  />
+                </Stack>
+              </RevealLeft>
+            </section>
+            {/* </Reveal> */}
 
-            <Reveal>
-              <div className={StyleProducts.radioInput}>
-                <h3 style={{ padding: "0px 20px" }}>
+            {/* <Reveal> */}
+            <div
+              className={
+                language === "en"
+                  ? StyleProducts.radioInput
+                  : StyleProducts.radioInputAr
+              }
+            >
+              <RevealLeft>
+                <h3
+                  style={{ padding: "0px 20px", marginBottom: "10px" }}
+                  className={language === "en" ? "" : StyleProducts.categ}
+                >
                   {language === "en" ? "Categories" : "الفئات"}
                 </h3>
-                <label className={StyleProducts.label}>
+                <label
+                  className={
+                    language == "en"
+                      ? StyleProducts.label
+                      : StyleProducts.labelAr
+                  }
+                >
                   <input
                     type="radio"
                     id="all"
@@ -226,25 +254,40 @@ const Products = () => {
                     {language === "en" ? "All" : "جميع الفئات"}
                   </p>
                 </label>
-                {categories.map((category) => (
-                  <label className={StyleProducts.label}>
-                    <input
-                      type="radio"
-                      id={category._id}
-                      name="value-radio"
-                      value={category._id}
-                      checked={selectedCategory === category._id}
-                      onChange={handleChange}
-                    />
-                    <p className={StyleProducts.text}>
-                      {language === "en"
-                        ? `${category.name}`
-                        : `${category.name_AR}`}
-                    </p>
-                  </label>
-                ))}
-              </div>
-            </Reveal>
+                {loading ? (
+                  <div className={StyleProducts.containerLoadingCata}>
+                    <div className={StyleProducts.loadingIndicatorCata}></div>
+                    <div className={StyleProducts.loadingIndicatorCata}></div>
+                    <div className={StyleProducts.loadingIndicatorCata}></div>
+                  </div>
+                ) : (
+                  categories.map((category) => (
+                    <label
+                      className={
+                        language == "en"
+                          ? StyleProducts.label
+                          : StyleProducts.labelAr
+                      }
+                    >
+                      <input
+                        type="radio"
+                        id={category._id}
+                        name="value-radio"
+                        value={category._id}
+                        checked={selectedCategory === category._id}
+                        onChange={handleChange}
+                      />
+                      <p className={StyleProducts.text}>
+                        {language === "en"
+                          ? `${category.name}`
+                          : `${category.name_AR}`}
+                      </p>
+                    </label>
+                  ))
+                )}
+              </RevealLeft>
+            </div>
+            {/* </Reveal> */}
           </div>
         </div>
 
@@ -267,87 +310,96 @@ const Products = () => {
 
         <div className={StyleProducts.content}>
           <div className={StyleProducts.cartContainer}>
-            {products.map((product) => (
-              <Reveal key={product._id}>
-                <div className={StyleProducts.oneCart}>
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                      transition: "background-color 0.5s, opacity 0.3s",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                    to={`/product/${product.slug}`}
-                    key={product._id}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.backgroundColor = "#f8f8f8";
-                      e.currentTarget.style.opacity = 0.8;
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.backgroundColor = "white";
-                      e.currentTarget.style.opacity = 0.8;
-                    }}
-                  >
-                    <img
-                      src={`${process.env.REACT_APP_IMAGE_PATH}${product.image}`}
-                      className={StyleProducts.imgCart}
-                      alt={product.name}
-                    />
-                    <div>
-                      <section
-                        className={`${StyleProducts.infoCart} ${
-                          language === "ar" ? StyleProducts.infoCartAR : ""
-                        }`}
-                      >
-                        <strong
-                          style={{
-                            fontSize: "20px",
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
-                          }}
+            {loading ? (
+              <div className={StyleProducts.containerLoading}>
+                <div className={StyleProducts.loadingIndicator}></div>
+                <div className={StyleProducts.loadingIndicator}></div>
+                <div className={StyleProducts.loadingIndicator}></div>
+              </div>
+            ) : (
+              products.map((product) => (
+                <Reveal key={product._id}>
+                  <div className={StyleProducts.oneCart}>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                        transition: "background-color 0.5s, opacity 0.3s",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                      to={`/product/${product.slug}`}
+                      key={product._id}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = "#f8f8f8";
+                        e.currentTarget.style.opacity = 0.8;
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = "white";
+                        e.currentTarget.style.opacity = 0.8;
+                      }}
+                    >
+                      <img
+                        src={`${process.env.REACT_APP_IMAGE_PATH}${product.image}`}
+                        className={StyleProducts.imgCart}
+                        alt={product.name}
+                      />
+                      <div>
+                        <section
+                          className={`${StyleProducts.infoCart} ${
+                            language === "ar" ? StyleProducts.infoCartAR : ""
+                          }`}
                         >
+                          <strong
+                            style={{
+                              fontSize: "20px",
+                              overflow: "hidden",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {language === "en"
+                              ? `${product.name}`
+                              : `${product.name_AR}`}
+                          </strong>
                           {language === "en"
-                            ? `${product.name}`
-                            : `${product.name_AR}`}
-                        </strong>
-                        {language === "en"
-                          ? `${product.category.name}`
-                          : `${product.category.name_AR}`}
-                        <p style={{ fontSize: "20px", color: "#c86823" }}>
-                          ${product.price}
-                        </p>
-                      </section>
-                    </div>
-                  </Link>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    disabled={isProductInCart(product._id)}
-                    onClick={() => addToCart(product)}
-                    sx={{
-                      bgcolor: "#C86823",
-                      transition: "background-color 0.3s ease, color 0.3s ease",
-                      "&:hover": {
-                        bgcolor: "#A0471D",
-                        color: "white",
-                      },
-                      textTransform: "none",
-                      fontSize: "1.1rem",
-                    }}
-                  >
-                    {isProductInCart(product._id) ? (
-                      "Already in Cart"
-                    ) : (
-                      <>
-                        <AddShoppingCartIcon />
-                        {language === "en" ? "Add to cart" : "أضف إلى السلة"}
-                      </>
-                    )}{" "}
-                  </Button>
-                </div>
-              </Reveal>
-            ))}
+                            ? `${product.category.name}`
+                            : `${product.category.name_AR}`}
+                          <p style={{ fontSize: "20px", color: "#c86823" }}>
+                            ${product.price}
+                          </p>
+                        </section>
+                      </div>
+                    </Link>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      disabled={isProductInCart(product._id)}
+                      onClick={() => addToCart(product)}
+                      sx={{
+                        bgcolor: "#C86823",
+                        transition:
+                          "background-color 0.3s ease, color 0.3s ease",
+                        "&:hover": {
+                          bgcolor: "#A0471D",
+                          color: "white",
+                        },
+                        textTransform: "none",
+                        fontSize: "1.1rem",
+                      }}
+                    >
+                      {isProductInCart(product._id) ? (
+                        "Already in Cart"
+                      ) : (
+                        <>
+                          <AddShoppingCartIcon />
+                          {language === "en" ? "Add to cart" : "أضف إلى السلة"}
+                        </>
+                      )}{" "}
+                    </Button>
+                  </div>
+                </Reveal>
+              ))
+            )}
           </div>
 
           <div style={{ display: "flex", justifyContent: "center" }}>

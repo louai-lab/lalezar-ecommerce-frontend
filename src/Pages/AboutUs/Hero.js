@@ -1,6 +1,10 @@
 import Styles from "./Hero.module.css";
 import img from "../../Assets/aboutUs.jpg";
+import { useLanguage } from "../../Utils/LanguageContext";
+
 const Hero = () => {
+  const { language } = useLanguage();
+
   return (
     <article className={Styles.blogsContainer}>
       <main className={Styles.blogsMain}>
@@ -14,8 +18,12 @@ const Hero = () => {
             </picture>
           </div>
           <h1 className={Styles.blogsTitle}>
-            Providing the best experience to make your{" "}
-            <span className={Styles.span}>Online Shopping</span>
+            {language === "en"
+              ? "Providing the best experience to make your"
+              : "توفير أفضل تجربة للقيام"}{" "}
+            <span className={Styles.span}>
+              {language === "en" ? "Online Shopping" : "بالتسوق عبر الإنترنت"}
+            </span>
           </h1>
         </figure>
       </main>

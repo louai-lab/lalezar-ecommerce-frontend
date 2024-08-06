@@ -57,14 +57,31 @@
   padding: 0px 25px;
 }
 
+.sideBarTitleAr {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  padding: 0px 25px;
+  justify-content: end;
+}
+
 .searchArticle,
 .categoryArticle {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   border-bottom: 1px solid rgb(110, 110, 110);
-  /* padding: 25px; */
   padding: 20px 10px;
+  /* align-items: end; */
+}
+
+.find {
+  text-align: right;
+}
+
+.categ {
+  text-align: end;
 }
 
 .checkBoxContainer {
@@ -251,6 +268,11 @@
     display: flex;
     /* flex-wrap: wrap; */
   }
+
+  .containerLoading {
+    flex-direction: column;
+    row-gap: 20px;
+  }
 }
 
 @media screen and (max-width: 430px) {
@@ -272,6 +294,9 @@
     margin: 5px;
   }
   .sideBarTitle {
+    padding: 10px;
+  }
+  .sideBarTitleAr {
     padding: 10px;
   }
 }
@@ -298,6 +323,20 @@
   margin: 0;
 }
 
+.radioInputAr {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: end;
+}
+
+.radioInputAr * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .label {
   display: flex;
   align-items: center;
@@ -307,8 +346,20 @@
   cursor: pointer;
   height: 50px;
   position: relative;
-  /* border: 0.1px solid black; */
   border-radius: 10px;
+}
+
+.labelAr {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0px 20px;
+  width: 220px;
+  cursor: pointer;
+  height: 50px;
+  position: relative;
+  border-radius: 10px;
+  justify-content: end;
 }
 
 /* #C86823 */
@@ -342,6 +393,7 @@
 .label .text {
   color: black;
   transition: color 0.2s ease;
+  /* text-align: end; */
 }
 
 .label:hover .text {
@@ -380,6 +432,73 @@
   transform: scale(1);
 }
 
+.labelAr::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 45px;
+  z-index: -1;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-radius: 10px;
+  /* border: 1px solid transparent; */
+}
+
+.labelAr:hover {
+  transition: all 0.2s ease;
+  background-color: #c86823;
+  /* border: none; */
+}
+
+.labelAr:has(input:checked)::before {
+  background-color: #c86823;
+  /* border-color: #435dd8; */
+  height: 50px;
+}
+
+.labelAr .text {
+  color: black;
+  transition: color 0.2s ease;
+}
+
+.labelAr:hover .text {
+  color: white;
+}
+
+.labelAr input[type="radio"] {
+  /* background-color: #202030; */
+  background-color: white;
+  border: 1px solid black;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelAr input[type="radio"]:checked {
+  background-color: #435dd8;
+  animation: pulse 0.7s forwards;
+}
+
+.labelAr input[type="radio"]:before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: #fff;
+  transform: scale(0);
+}
+
+.labelAr input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
@@ -389,5 +508,65 @@
   }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Info.module.css or any appropriate CSS file */
+
+.containerLoading {
+  display: flex;
+  column-gap: 30px;
+}
+
+.loadingIndicator {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.containerLoadingCata {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-top: 20px;
+}
+
+.loadingIndicatorCata {
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

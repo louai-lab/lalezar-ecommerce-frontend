@@ -141,7 +141,11 @@ export default function Blogs() {
           </main>
         </article>
       ) : isBlogPending ? (
-        <p>loading...</p>
+        <div className={Styles.containerLoading}>
+          <div className={Styles.loadingIndicator}></div>
+          <div className={Styles.loadingIndicator}></div>
+          <div className={Styles.loadingIndicator}></div>
+        </div>
       ) : blogError ? (
         <p>error...</p>
       ) : (

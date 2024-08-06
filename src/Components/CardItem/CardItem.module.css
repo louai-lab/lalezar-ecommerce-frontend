@@ -56,7 +56,7 @@
 }
 
 .price {
-  width: 6rem;
+  /* width: 6rem; */
   display: flex;
   align-items: center;
 }
@@ -152,7 +152,7 @@ input::-webkit-inner-spin-button {
   }
 
   .bottom {
-    padding: 0 2rem;
+    /* padding: 0 2rem; */
   }
   .color {
     position: absolute;
@@ -194,7 +194,7 @@ input::-webkit-inner-spin-button {
   .bottom {
     flex-direction: column;
     width: 100%;
-    align-items: flex-start;
+    /* align-items: flex-start; */
   }
 
   .bottom {
@@ -204,6 +204,7 @@ input::-webkit-inner-spin-button {
   .section {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .title {

@@ -7,11 +7,14 @@ import { Button } from "@mui/material";
 import googleG from "../../Assets/G.png";
 import useApi from "../../Hooks/UseApi";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const OAuth = ({ isLogin }) => {
   const { apiCall, loading } = useApi();
   const { fetchUserData, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const { language } = useLanguage();
 
   const handleGoogleClick = async () => {
     try {
@@ -55,7 +58,13 @@ const OAuth = ({ isLogin }) => {
             textTransform: "none",
           }}
         >
-          {isLogin ? "Login with Google" : "Sign up with Google"}
+          {isLogin
+            ? language === "en"
+              ? "Login with Google"
+              : "تسجيل الدخول عبر جوجل"
+            : language === "en"
+            ? "Sign up with Google"
+            : "قم بالتسجيل عبر جوجل"}
         </Button>
       )}
     </>

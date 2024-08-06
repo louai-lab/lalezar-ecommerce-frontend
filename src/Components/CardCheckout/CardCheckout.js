@@ -11,6 +11,7 @@ import useApi from "../../Hooks/UseApi";
 import NoteModal from "../Note/Note";
 import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../../Context/CartContext";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 export default function CardCheckout({ totalPrice, cartItems }) {
   const { setCartItemCount, setCartItems } = useContext(CartContext);
@@ -34,6 +35,8 @@ export default function CardCheckout({ totalPrice, cartItems }) {
       }
     },
   });
+
+  const { language } = useLanguage();
 
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -86,13 +89,25 @@ export default function CardCheckout({ totalPrice, cartItems }) {
         });
 
         if (error) {
-          toast.error("An error occured, order not sent !!");
+          toast.error(
+            language === "en"
+              ? "An error occured, order not sent !!"
+              : "حدث خطأ، لم يتم إرسال الطلب !!"
+          );
         } else {
           localStorage.removeItem("cart");
-          toast.success("Order sent Successfuly ");
-          toast.success("Items removed from your cart ");
+          toast.success(
+            language === "en"
+              ? "Order sent Successfuly"
+              : "تم إرسال الطلب بنجاح"
+          );
+          toast.success(
+            language === "en"
+              ? `Items removed from your cart`
+              : `العناصر التي تمت إزالتها من سلة التسوق الخاصة بك`
+          );
           setCartItems([]);
-          setCartItemCount(null)
+          setCartItemCount(null);
         }
       } catch (error) {
         console.log(error);
@@ -126,10 +141,14 @@ export default function CardCheckout({ totalPrice, cartItems }) {
     >
       <ToastContainer />
       <div className={styles.cardWrapper}>
-        <p className={styles.titleCard}>Checkout your Order</p>
+        <p
+          className={language === "en" ? styles.titleCard : styles.titleCardAr}
+        >
+          {language === "en" ? "Check your Order" : "تحقق من طلبك"}
+        </p>
         <form className={styles.form} onSubmit={(e) => SendOrder(e)}>
           <div className={styles.price}>
-            <p>Price</p>
+            <p>{language === "en" ? "Price" : "السعر"}</p>
             <span>${totalPrice.toFixed(2)}</span>
           </div>
           <div className={`${styles.deliveryPart} ${styles.form}`}>
@@ -140,7 +159,9 @@ export default function CardCheckout({ totalPrice, cartItems }) {
                 minWidth: 50,
               }}
             >
-              <InputLabel htmlFor="Country">Country</InputLabel>
+              <InputLabel htmlFor="Country">
+                {language === "en" ? "Country" : "البلد"}
+              </InputLabel>
               <Select
                 value={selectedCountry}
                 onChange={(e) => handleCountryChange(e)}
@@ -170,7 +191,9 @@ export default function CardCheckout({ totalPrice, cartItems }) {
               }}
               required
             >
-              <InputLabel htmlFor="City">City</InputLabel>
+              <InputLabel htmlFor="City">
+                {language === "en" ? "City" : "المدينة"}
+              </InputLabel>
               <Select
                 value={selectedCity}
                 onChange={(e) => handleCityChange(e)}
@@ -203,18 +226,20 @@ export default function CardCheckout({ totalPrice, cartItems }) {
             <TextField
               required
               id="outlined-required"
-              label="Address"
+              label={language === "en" ? "Address" : "العنوان"}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <p>
+            <p className={language === "en" ? styles.note : styles.noteAr}>
               {selectedPrice !== null
                 ? `Delivery Fees: $${selectedPrice.toFixed(2)}`
-                : "Please select a country and city to see the delivery fees."}
+                : language === "en"
+                ? "Please select a country and city to see the delivery fees."
+                : "يرجى اختيار الدولة والمدينة لمعرفة رسوم التوصيل."}
             </p>
           </div>
           <div className={styles.totalPrice}>
-            <p>Total Price</p>
+            <p>{language === "en" ? "Total Price" : "السعر النهائي"}</p>
             <div>${(totalPrice + selectedPrice).toFixed(2)}</div>
           </div>
           <div className={styles.buttonContainer}>
@@ -231,7 +256,7 @@ export default function CardCheckout({ totalPrice, cartItems }) {
                 },
               }}
             >
-              Checkout
+              {language === "en" ? "Checkout" : "الدفع"}
             </Button>
           </div>
         </form>

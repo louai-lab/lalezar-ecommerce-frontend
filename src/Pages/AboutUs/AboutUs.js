@@ -5,9 +5,13 @@ import Location from "./Location";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../Utils/AxiosInstance";
 import { useCategoriesStore } from "../../Zustand/Store";
+import Info from "./Info";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const AboutUs = () => {
   const { categoryCount } = useCategoriesStore();
+
+  const { language } = useLanguage();
 
   const {
     isPending: isCountriesPending,
@@ -51,38 +55,58 @@ const AboutUs = () => {
     {
       id: 1,
       number: categoryCount && categoryCount,
-      text: "Shopping category",
+      text: language === "en" ? "Shopping category" : "فئة التسوق",
     },
     {
       id: 2,
       number: countriesData && countriesData,
-      text: "Different Country",
+      text: language === "en" ? "Different Countries" : "بلاد مختلفة",
     },
-    { id: 3, number: userData && userData.length, text: "Happy Clients" },
+    {
+      id: 3,
+      number: userData && userData.length,
+      text: language === "en" ? "happy clients" : "عملاء سعداء",
+    },
   ];
 
   return (
     <>
       <Hero />
       <div className={Styles.container}>
-        <div className={Styles.top}>
+        <div className={language === "en" ? Styles.top : Styles.topAr}>
           <div className={Styles.topLeft}>
             <p className={Styles.aboveTitle}></p>
             <h1 className={Styles.title}>
-              Let's get to know{" "}
-              <span className={Styles.titleSpan}>Lalezar</span>{" "}
+              {language === "en" ? "Let's get to know" : "دعونا نتعرف على"}{" "}
+              <span className={Styles.titleSpan}>
+                {language === "en" ? "Lalezar" : "لاليزار"}
+              </span>{" "}
             </h1>
             <section className={`${Styles.section} ${Styles.description}`}>
-              <strong>LALEZAR</strong> offers "spices" in an innovative way by
-              introducing new flavors to traditional species while maintaining
-              the selection of the finest spice beans to manufacture certain
-              species in order to satisfy the largest number of consumers. Our
-              100% Lebanese transformative products are passionately made, wide
-              choices of distinctive and innovative mixtures, without any
-              unhealthy additives or the addition of preservatives, also
-              gluten-free which distinguishes them from other products in the
-              market and keeps them out of competition due to their high
-              quality, manufacturing method and innovative types.
+              <strong>{language === "en" ? "LALEZAR" : " لاليزار"}</strong>
+              {language === "en"
+                ? ` , Since its inception in 2019, Lalezar
+              has distinguished itself in offering spices in innovative ways
+              that combine new flavors with high quality. We always strive to
+              select the finest spice seeds and create unique blends that cater
+              to the tastes of diverse consumers. In 2022, we expanded our
+              operations by opening a workshop in Koura, North Lebanon, and
+              registering the establishment under number 3020284. This
+              development helped us increase production and extend our reach
+              within the Lebanese market, as well as create five new job
+              opportunities, raising our team to a total of seven members.`
+                : ` منذ انطلاقتها في عام 2019، تميزت لاليزار في تقديم البهارات بطرق مبتكرة تجمع بين النكهات الجديدة والجودة العالية. نسعى دائمًا لاختيار أجود حبوب التوابل وتصنيع خلطات متميزة تلبي أذواق مختلف المستهلكين.
+
+                في عام 2022، قمنا بتوسيع عملياتنا بافتتاح مشغل في الكورة شمال لبنان وتسجيل المؤسسة برقم /3020284/. هذا التطور ساعدنا على زيادة الإنتاج وتوسيع نطاق وصولنا في السوق اللبنانية، بالإضافة إلى خلق خمس فرص عمل جديدة، مما رفع عدد أعضاء فريقنا إلى سبعة أشخاص.`}
+              <br></br>
+              <br></br>
+              <strong>{language === "en" ? "LALEZAR" : "لاليزار"}</strong>
+              {language === "en"
+                ? `is
+              dedicated to offering the best products at competitive prices,
+              while maintaining innovation and quality, to meet the needs and
+              desires of our customers.`
+                : " مكرسة لتقديم أفضل المنتجات بأسعار تنافسية، مع الحفاظ على الابتكار والجودة، لتلبية احتياجات ورغبات عملائنا."}
             </section>
             <section className={`${Styles.section} ${Styles.services}`}>
               {data.map((item) => {
@@ -114,7 +138,9 @@ const AboutUs = () => {
               </svg>
             </span>
             <span className={Styles.quoteText}>
-              We have made many people satisfied with our Platform
+              {language === "en"
+                ? `We have made many people satisfied with our Platform`
+                : `لقد جعلنا العديد من الأشخاص راضين عن منصتنا.`}
             </span>
             <span className={Styles.quoteSvg2}>
               <svg
@@ -168,6 +194,9 @@ const AboutUs = () => {
               </svg>
             </span>
           </div>
+        </div>
+        <div className={Styles.info}>
+          <Info />
         </div>
         <h1 className={Styles.title}>Where to find us?</h1>
         <Location />

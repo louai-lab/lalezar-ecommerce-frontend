@@ -168,7 +168,7 @@ function Navbar() {
                         },
                       }}
                     >
-                      Log In
+                      {language === "en" ? "Log In" : "تسجيل دخول"}
                     </Button>
 
                     <Button
@@ -185,7 +185,7 @@ function Navbar() {
                         },
                       }}
                     >
-                      Sign Up
+                      {language === "en" ? "Sign Up" : "افتح حساب"}
                     </Button>
                   </Stack>
                 </li>
@@ -419,7 +419,7 @@ function Navbar() {
                       },
                     }}
                   >
-                    Log In
+                    {language === "en" ? "Log In" : "تسجيل دخول"}
                   </Button>
 
                   <Button
@@ -435,7 +435,7 @@ function Navbar() {
                       },
                     }}
                   >
-                    Sign Up
+                    {language === "en" ? "Sign Up" : "افتح حساب"}
                   </Button>
                 </Stack>
               </li>

@@ -13,6 +13,14 @@
   margin-bottom: 5rem;
 }
 
+.topAr {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
 .topLeft {
   width: 60%;
 }
@@ -177,8 +185,16 @@
   display: none;
 }
 
+.info {
+  margin: 5rem 0px;
+  /* background-color: red; */
+}
+
 @media screen and (max-width: 1000px) {
-  .top{
+  .top {
+    margin-bottom: 0;
+  }
+  .topAr {
     margin-bottom: 0;
   }
   .topRight {
@@ -197,7 +213,7 @@
     border-radius: 10px;
   }
 
-  .quoteContainer{
+  .quoteContainer {
     width: 100%;
     align-items: center;
     display: flex;
@@ -236,7 +252,7 @@
   .section.section.services {
     justify-content: center;
   }
-  .section.description{
+  .section.description {
     font-size: 0.9rem;
   }
 }

@@ -11,6 +11,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
+import { useLanguage } from "../../Utils/LanguageContext.js";
 
 function Login() {
   const [email, setEmail] = useState();
@@ -23,6 +24,8 @@ function Login() {
   const { fetchUserData } = useContext(AuthContext);
   const { apiCall } = useApi();
   const navigate = useNavigate();
+
+  const { language } = useLanguage();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -90,11 +93,19 @@ function Login() {
       <main className={Styles.mainContainer}>
         <section className={Styles.pageContainer}>
           <div className={Styles.div}>
-            <h1 className={Styles.title}>Login to your account</h1>
+            <h1
+              className={`${language === "en" ? Styles.title : Styles.titleAr}`}
+            >
+              {language === "en"
+                ? "Login to your account"
+                : "تسجيل الدخول إلى حسابك"}
+            </h1>
             <div className={Styles.linkPhrase}>
-              <p className={Styles.p}>Don't have one? </p>{" "}
+              <p className={Styles.p}>
+                {language === "en" ? "Don't have one?" : "ليس لديك حساب؟"}
+              </p>{" "}
               <NavLink to="/signup" className={Styles.linkLogin}>
-                Sign Up
+                {language === "en" ? "Sign Up" : "سجّل الآن"}
               </NavLink>
             </div>
           </div>
@@ -104,7 +115,7 @@ function Login() {
                 <TextField
                   fullWidth
                   id="outlined-basic"
-                  label="Email"
+                  label={language === "en" ? "Email" : "البريد الإلكتروني"}
                   variant="outlined"
                   value={email}
                   onChange={(e) => {
@@ -136,7 +147,7 @@ function Login() {
                 <TextField
                   fullWidth
                   id="outlined-basic"
-                  label="Password"
+                  label={language === "en" ? "Password" : "كلمة السر"}
                   variant="outlined"
                   value={password}
                   type={showPassword ? "text" : "password"}
@@ -186,9 +197,17 @@ function Login() {
                     },
                   }}
                 >
-                  {loading === true ? "Logging in..." : "Login"}
+                  {loading === true
+                    ? language === "en"
+                      ? "Logging in..."
+                      : "تسجيل الدخول..."
+                    : language === "en"
+                    ? "Login"
+                    : "تسجيل الدخول"}
                 </Button>
-                <p className={Styles.orPhrase}>Or</p>
+                <p className={Styles.orPhrase}>
+                  {language === "en" ? "Or" : "أو"}
+                </p>
                 <OAuth isLogin={true} />
               </div>
             </form>

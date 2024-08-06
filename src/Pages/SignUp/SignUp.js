@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
-import emailjs from "@emailjs/browser";
+import { useLanguage } from "../../Utils/LanguageContext.js";
 
 function SignUp() {
   const [firstName, setFirstName] = useState();
@@ -26,6 +26,8 @@ function SignUp() {
   const { fetchUserData } = useContext(AuthContext);
   const { apiCall } = useApi();
   const navigate = useNavigate();
+
+  const { language } = useLanguage();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -104,11 +106,15 @@ function SignUp() {
       <main className={Styles.mainContainer}>
         <section className={Styles.pageContainer}>
           <div className={Styles.div}>
-            <h1 className={Styles.title}>Register your account</h1>
+            <h1 className={Styles.title}>
+              {language === "en" ? "Register your account" : "سجّل حسابك"}
+            </h1>
             <div className={Styles.linkPhrase}>
-              <p className={Styles.p}>Already have one?</p>
+              <p className={Styles.p}>
+                {language === "en" ? "Already have one?" : "؟لديك حساب؟"}
+              </p>
               <NavLink to="/Login" className={Styles.linkLogin}>
-                login
+                {language === "en" ? "login" : "سجّل"}
               </NavLink>
             </div>
           </div>
@@ -120,7 +126,7 @@ function SignUp() {
                   required
                   fullWidth
                   id="outlined-basic"
-                  label="First Name"
+                  label={language === "en" ? "First Name" : "الاسم الأول"}
                   variant="outlined"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -141,7 +147,7 @@ function SignUp() {
                   required
                   fullWidth
                   id="outlined-basic"
-                  label=" Last Name"
+                  label={language === "en" ? "Last Name" : "الاسم الأخير"}
                   variant="outlined"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -162,7 +168,7 @@ function SignUp() {
                   required
                   fullWidth
                   id="outlined-basic"
-                  label="Email"
+                  label={language === "en" ? "Email" : "البريد الإلكتروني"}
                   variant="outlined"
                   helperText={!emailError ? "" : emailError}
                   value={email}
@@ -196,7 +202,7 @@ function SignUp() {
                   required
                   fullWidth
                   id="outlined-basic"
-                  label="Password"
+                  label={language === "en" ? "Password" : "كلمة السر"}
                   helperText={!passwordError ? "" : passwordError}
                   variant="outlined"
                   value={password}
@@ -248,7 +254,7 @@ function SignUp() {
                 <TextField
                   fullWidth
                   id="outlined-basic"
-                  label="Phone Number"
+                  label={language === "en" ? "Phone Number" : "رقم الهاتف"}
                   variant="outlined"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
@@ -281,9 +287,17 @@ function SignUp() {
                     textTransform: "none",
                   }}
                 >
-                  {loading ? "Signing up..." : "Sign Up"}
+                  {loading
+                    ? language === "en"
+                      ? "Signing up..."
+                      : "تسجيل..."
+                    : language === "en"
+                    ? "Sign Up"
+                    : "سجّل"}
                 </Button>
-                <p className={Styles.orPhrase}>Or</p>
+                <p className={Styles.orPhrase}>
+                  {language === "en" ? "Or" : "أو"}
+                </p>
                 <OAuth isLogin={false} />
               </div>
             </form>

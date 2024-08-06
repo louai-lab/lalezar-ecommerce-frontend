@@ -35,7 +35,7 @@ export default function BlogDetails() {
     },
   });
 
-  console.log(data);
+  // console.log(data);
   return (
     <>
       {data ? (

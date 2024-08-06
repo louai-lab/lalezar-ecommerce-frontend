@@ -52,7 +52,7 @@ export default function CommentSection({ comments, blogId }) {
     textAreaRef.current.blur();
     if (comment && !replyState) {
       const addedComment = {
-        name: `${user.firstName} ${user.lastName}` || "username",
+        name: `${user?.firstName} ${user?.lastName}` || "username",
         description: comment,
         type: "comment",
         replies: [],
@@ -149,14 +149,13 @@ export default function CommentSection({ comments, blogId }) {
                   onClick={(e) => setComment("")}
                   disabled={comment ? false : true}
                 >
-                  Cancel
+                  {language === "en" ? "Cancel" : "إلغاء"}
                 </button>
                 <button className={Styles.buttonSubmit} type="submit">
-                  Post
+                  {language === "en" ? "Post" : "انشر"}
                 </button>
               </div>
             </form>
-           
           </article>
 
           <div className={Styles.allComments}>
@@ -175,8 +174,11 @@ export default function CommentSection({ comments, blogId }) {
                 );
               })
             ) : (
-              <p className={Styles.noComments}>No comments yet</p>
+              <p className={Styles.noComments}>
+                {language === "en" ? "No comments yet" : "لا تعليقات حتى الآن"}
+              </p>
             )}
+            d-
           </div>
         </>
       ) : isPending ? (
