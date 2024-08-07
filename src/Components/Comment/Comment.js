@@ -18,7 +18,7 @@ export default function Comment({
   const { user } = useContext(AuthContext);
   const type = element.type;
 
-  console.log(element);
+  // console.log(element);
 
   const handleViewReplyButton = () => {
     setOpenReplies(!openReplies);

@@ -39,6 +39,7 @@ const Home = () => {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_BACKEND_ENDPOINT}blog/lastTwo`
         );
+        // console.log(response.data);
         return response.data;
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -270,7 +271,7 @@ const Home = () => {
                 <BlogCard
                   key={index}
                   title={item.title_en}
-                  image={item.images[0]}
+                  image={item.image}
                   description={item.description_en}
                   slug={item.slug}
                 />

@@ -91,7 +91,7 @@
   border-top: 1px solid gray;
 }
 
-.commentsHeaderAR{
+.commentsHeaderAR {
   text-align: end;
 }
 
@@ -119,5 +119,68 @@
   }
   .commentButtonContainer > button {
     margin: 5px;
+  }
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.containerComments {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.singleComment {
+  display: flex;
+  column-gap: 10px;
+}
+
+.timeDescription {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: -webkit-fill-available;
+}
+
+.nameDescription {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  background-color: rgb(248, 243, 243);
+  padding: 10px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.imagePerson {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.name {
+  font-weight: bold;
+  color: rgb(19, 19, 19);
+}
+
+.description {
+  color: rgb(19, 19, 19);
+  padding-top: 2px;
+}
+
+.containerActions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .imagePerson {
+    width: 50px;
+    height: 50px;
   }
 }

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const BlogCard = ({ title, image, description, slug }) => {
   const navigate = useNavigate();
 
+  // console.log(image);
+
   const createMarkup = () => {
     // Split the description into words
     const words = description.split(" ");

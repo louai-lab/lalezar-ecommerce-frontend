@@ -88,7 +88,7 @@ const Table = ({
           "description_en",
           "description_ar",
           "video",
-          "images",
+          "image",
         ];
       } else {
         visibleFields = Object.keys(data[0]);

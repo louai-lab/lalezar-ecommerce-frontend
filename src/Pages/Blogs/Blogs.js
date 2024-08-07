@@ -55,27 +55,14 @@ export default function Blogs() {
         if (res.data.length > 0) {
           setLatestBlog(res.data[0]);
         }
+        // console.log(res.data);
         return res.data;
       } catch (error) {
         console.error("Error fetching blog:", error);
-        throw error; // Re-throw the error to let React Query handle it
+        throw error;
       }
     },
   });
-
-  // const { isPending: isOtherPending, error: otherError, data: otherData } = useQuery({        queryKey: ["repoData"],
-  // queryKey: ["commentData"],
-  // queryFn: async () => {
-  //     try {
-  //       const res = await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}blog/one`, { slug });
-  //       console.log("fetched blog res.data: ",res.data);
-  //       return res.data;
-  //     } catch (error) {
-  //       console.error("Error fetching blog:", error);
-  //       throw error; // Re-throw the error to let React Query handle it
-  //     }
-  //   },
-  // });
 
   return (
     <>

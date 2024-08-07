@@ -1,4 +1,4 @@
-import { Box, Modal, TextField, Button } from "@mui/material";
+import { Box, Modal, TextField, Button, Input } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import TextEditor from "../TextEditor/TextEditor";
 
@@ -11,6 +11,7 @@ export default function CreateBlogModal({
 }) {
   const [textAr, setTextAr] = useState("");
   const [textEn, setTextEn] = useState("");
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     setNewBlog({ ...newBlog, description_en: textEn });
@@ -28,6 +29,15 @@ export default function CreateBlogModal({
   };
   const changeYoutubeLink = (e) => {
     setNewBlog({ ...newBlog, video: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      // Update newBlog state with the image
+      setNewBlog((prev) => ({ ...prev, image: file }));
+    }
   };
 
   const style = {
@@ -91,6 +101,9 @@ export default function CreateBlogModal({
             focused={newBlog.video ? true : false}
             onChange={(e) => changeYoutubeLink(e)}
           />
+
+          <Input type="file" accept="image/*" onChange={handleImageChange} />
+
           <div style={{ display: "flex", gap: "20px" }}>
             {/* <button onClick={()=>createBlog()}>create</button>
             <button onClick={()=>setOpenCreate(false)}>cancel</button> */}
@@ -114,7 +127,7 @@ export default function CreateBlogModal({
               onClick={() => setOpenCreate(false)}
               sx={{
                 color: "#C86823",
-                bgcolor: 'transparent',
+                bgcolor: "transparent",
                 transition: "background-color 0.3s ease, color 0.3s ease",
                 textTransform: "none",
                 "&:hover": {

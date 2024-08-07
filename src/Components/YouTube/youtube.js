@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import YouTube from 'react-youtube';
-import Styles from './youtube.module.css';
+import React, { useEffect, useState } from "react";
+import YouTube from "react-youtube";
+import Styles from "./youtube.module.css";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const YoutubeVideo = ({ videoUrl }) => {
   const [player, setPlayer] = useState(null);
   const [videoId, setVideoId] = useState("");
   const [hasPlayed, setHasPlayed] = useState(false);
+
+  const { language } = useLanguage();
 
   const opts = {
     playerVars: {
@@ -27,7 +30,8 @@ const YoutubeVideo = ({ videoUrl }) => {
 
   useEffect(() => {
     const getYouTubeVideoId = (videoUrl) => {
-      const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const regex =
+        /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
       const match = videoUrl.match(regex);
       return match ? match[1] : null;
     };
@@ -35,24 +39,29 @@ const YoutubeVideo = ({ videoUrl }) => {
     // const videoUrl = "https://www.youtube.com/watch?v=magXOsH5QAc";
     const video = getYouTubeVideoId(videoUrl);
     setVideoId(video);
-
   }, []);
 
   return (
     <>
-    { videoUrl ?
-      <section className={Styles.youtubeVideo}>
-        <h3 style={{marginBottom:"20px"}}>Check out our video: </h3>
-        <YouTube
-          videoId={videoId}
-          opts={opts}
-          onReady={onReady}
-          onStateChange={onStateChange}
-        />
-      </section>
-      :
-      ""
-    }
+      {videoUrl ? (
+        <section className={Styles.youtubeVideo}>
+          <h3
+            className={`${Styles.caption} ${
+              language === "en" ? "" : Styles.captionAr
+            }`}
+          >
+            {language === "en" ? "Check out our video:" : ":شاهد الفيديو"}
+          </h3>
+          <YouTube
+            videoId={videoId}
+            opts={opts}
+            onReady={onReady}
+            onStateChange={onStateChange}
+          />
+        </section>
+      ) : (
+        ""
+      )}
     </>
   );
 };

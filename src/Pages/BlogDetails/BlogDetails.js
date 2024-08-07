@@ -18,6 +18,8 @@ export default function BlogDetails() {
 
   const { language } = useLanguage();
 
+  // console.log(slug)
+
   const { isPending, error, data } = useQuery({
     queryKey: ["blogdetails"],
     queryFn: async () => {
@@ -27,10 +29,11 @@ export default function BlogDetails() {
           { slug }
         );
         setBlogId(res.data._id);
+        // console.log("single", res.data);
         return res.data;
       } catch (error) {
         console.error("Error fetching blog:", error);
-        throw error; // Re-throw the error to let React Query handle it
+        throw error;
       }
     },
   });
@@ -40,18 +43,26 @@ export default function BlogDetails() {
     <>
       {data ? (
         <main className={Styles.blogOneMain}>
+          <picture className={Styles.blogOnePicture}>
+            <img
+              src={`${process.env.REACT_APP_IMAGE_PATH}${data?.image}`}
+              alt="stock spices image"
+            />
+            {/* )} */}
+          </picture>
+
           <section
             className={`${Styles.blogOneTitleContainer} ${
               language === "ar" ? Styles.blogOneTitleContainerAR : ""
             }`}
           >
-            <p
+            {/* <p
               className={`${Styles.selectedBlogOneSpiceName} ${
                 language === "ar" ? Styles.selectedBlogOneSpiceNameAR : ""
               }`}
             >
               Lalezar
-            </p>
+            </p> */}
             <h1 className={Styles.blogOneTitle}>
               {language === "en" ? `${data.title_en}` : `${data.title_ar}`}
             </h1>
@@ -59,21 +70,16 @@ export default function BlogDetails() {
               {data ? dateConverter(data.updatedAt, language) : "loading..."}
             </p>
           </section>
-          <picture className={Styles.blogOnePicture}>
-            <source
-              srcSet={
-                data && typeof data.images === Array ? data.images[0] : ""
-              }
-              media="(orientation: landscape)"
-            />
-            <img
-              src={`${process.env.REACT_APP_IMAGE_PATH}${data.images[0]}`}
-              alt="stock spices image"
-            />
-          </picture>
-          <article className={Styles.articleValue}>
+
+          <article
+            className={`${Styles.articleValue} ${
+              language === "en" ? "" : Styles.otherLanguage
+            }`}
+          >
             {typeof data.description_en === "string"
-              ? parse(data.description_en)
+              ? language === "en"
+                ? parse(data.description_en)
+                : parse(data.description_ar)
               : ""}
           </article>
           {data && data.video ? (
@@ -82,7 +88,7 @@ export default function BlogDetails() {
             ""
           )}
 
-          <CommentSection comments={data.comments} blogId={blogId} />
+          <CommentSection initialComments={data.comments} blogId={blogId} />
         </main>
       ) : isPending ? (
         <p>loading...</p>

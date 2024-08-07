@@ -24,7 +24,7 @@ export default function BlogCard({ element }) {
           transition={{ duration: 0.2 }}
         >
           <img
-            src={`${process.env.REACT_APP_IMAGE_PATH}${element.images[0]}`}
+            src={`${process.env.REACT_APP_IMAGE_PATH}${element.image}`}
             width={"100%"}
           />
         </motion.div>

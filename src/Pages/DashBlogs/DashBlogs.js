@@ -27,6 +27,7 @@ const DashBlogs = () => {
     title_ar: "",
     description_en: "",
     description_ar: "",
+    image: "",
     video: "",
   });
 
@@ -62,13 +63,22 @@ const DashBlogs = () => {
       console.log("createBlog function triggered!");
       if (newBlog) {
         console.log("newblog has passed the if statement and will be created");
-        await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}blog`, {
-          title_en: newBlog.title_en,
-          title_ar: newBlog.title_ar,
-          description_en: newBlog.description_en,
-          description_ar: newBlog.description_ar,
-          video: newBlog.video,
-        });
+        await axios.post(
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}blog`,
+          {
+            title_en: newBlog.title_en,
+            title_ar: newBlog.title_ar,
+            description_en: newBlog.description_en,
+            description_ar: newBlog.description_ar,
+            image: newBlog.image,
+            video: newBlog.video,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       }
       setOpenCreate(false);
       blogsRefetch();
