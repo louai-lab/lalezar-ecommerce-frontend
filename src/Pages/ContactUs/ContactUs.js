@@ -74,7 +74,8 @@ const ContactUs = () => {
     <div className={styles.contactPage}>
       <ToastContainer />
       <h1
-        className={`${styles.title} ${language === "ar" ? styles.titleAR : ""}`}
+        // className={`${styles.title} ${language === "ar" ? styles.titleAR : ""}`}
+        className={language === "en" ? styles.title : styles.titleAR}
       >
         {language === "en" ? "Contact Us" : "تواصل معنا"}
       </h1>
@@ -84,7 +85,11 @@ const ContactUs = () => {
         }`}
       >
         <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-          <div className={styles.contactForm}>
+          <div
+            className={`${styles.contactForm} ${
+              language === "en" ? "" : styles.contactAr
+            }`}
+          >
             <div className={styles.inputsHolder}>
               <TextField
                 required

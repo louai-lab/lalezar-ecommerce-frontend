@@ -71,13 +71,29 @@ function Footer() {
                 <Link to="www.facebook.com" className={`${styles.socialIcon}`}>
                   <FacebookRoundedIcon />
                 </Link>
-                <Link to="www.Instagram.com" className={`${styles.socialIcon}`}>
-                {/* https://www.instagram.com/lalezarspices/ */}
+                {/* <Link to="www.Instagram.com" className={`${styles.socialIcon}`}>
                   <InstagramIcon />
-                </Link>
-                <Link to="" className={`${styles.socialIcon}`}>
+                </Link> */}
+                <a
+                  href="https://www.instagram.com/lalezarspices/"
+                  className={`${styles.socialIcon}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramIcon />
+                </a>
+
+                {/* <Link to="" className={`${styles.socialIcon}`}>
                   <WhatsAppIcon />
-                </Link>
+                </Link> */}
+                <a
+                  href="https://wa.me/96181240461"
+                  className={`${styles.socialIcon}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsAppIcon />
+                </a>
               </div>
             </div>
             <div className={`${styles.linksColumn} ${styles.middle}`}>

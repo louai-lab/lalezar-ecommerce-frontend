@@ -35,6 +35,11 @@
   margin-bottom: 1rem;
   font-size: 1.6rem;
   font-weight: 500;
+  color: var(--color1);
+}
+
+.titleAr {
+  text-align: right;
 }
 
 .aboveTitle {
@@ -57,10 +62,15 @@
   margin-bottom: 3rem;
 }
 
+.descriptionAr {
+  text-align: right;
+}
+
 .section.services {
   margin-top: 3rem;
   display: flex;
   justify-content: space-between;
+  /* align-items: center; */
   flex-wrap: wrap;
   row-gap: 2rem;
 }
@@ -254,5 +264,11 @@
   }
   .section.description {
     font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .section.services {
+    justify-content: center;
   }
 }

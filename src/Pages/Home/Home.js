@@ -106,11 +106,11 @@ const Home = () => {
       <HeroSection />
       <main className={Styles.main}>
         <h2 className={`${Styles.h2} ${language === "ar" ? Styles.h2AR : ""}`}>
-          {language === "en" ? "Main Categories" : "الفئات الرئيسية"}
+          {language === "en" ? "Main Categories :" : ": الفئات الرئيسية"}
         </h2>
         <MainCategories categories={categories} loading={loading} />
         <h2 className={`${Styles.h2} ${language === "ar" ? Styles.h2AR : ""}`}>
-          {language === "en" ? "Latest Products" : "أحدث المنتجات"}
+          {language === "en" ? "Latest Products :" : ": أحدث المنتجات"}
         </h2>
         <article className={Styles.products}>
           {loading ? (
@@ -224,7 +224,7 @@ const Home = () => {
         </article>
 
         <h2 className={`${Styles.h2} ${language === "ar" ? Styles.h2AR : ""}`}>
-          {language === "en" ? "Latest Blogs" : "أحدث المدونات"}
+          {language === "en" ? "Latest Blogs :" : ": أحدث المدونات"}
         </h2>
         <article className={Styles.Blogs}>
           {isBlogPending ? (
@@ -283,7 +283,7 @@ const Home = () => {
           <h2
             className={`${Styles.h2} ${language === "ar" ? Styles.h2AR : ""}`}
           >
-            {language === "en" ? "Our Clients" : "زبائننا"}
+            {language === "en" ? "Our Clients :" : ": زبائننا"}
           </h2>
           <Clients data={clients} />
         </article>

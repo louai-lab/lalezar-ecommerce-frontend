@@ -1,30 +1,31 @@
-.Name{
-    position: relative;
+.Name {
+  position: relative;
 }
 
-.Span{
-    padding:1rem ;
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: #555555;
-    z-index: 1;
+.Span {
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #555555;
+  z-index: 1;
 }
 
 .ActiveSpan {
-    border-bottom: 2px solid var(--color1);
+  border-bottom: 2px solid var(--color1);
+  color: var(--color1);
+}
+
+.Span:hover {
+  cursor: pointer;
+}
+
+.Span:active,
+.Span:focus {
+  border-bottom: 2px solid var(--color1);
+}
+
+@media screen and (max-width: 380px) {
+  .Span {
+    font-size: 1rem;
   }
-
-.Span:hover{
-    cursor: pointer;
-}
-
-.Span:active , .Span:focus{
-    border-bottom: 2px solid var(--color1);
-}
-
-@media screen and (max-width : 380px) {
-    .Span {
-        font-size: 1rem;
-    }
-    
 }

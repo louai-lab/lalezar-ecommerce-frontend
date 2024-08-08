@@ -24,8 +24,9 @@ import DashBlogs from "../Pages/DashBlogs/DashBlogs.js";
 import DashOutlet from "./DashOutlet.js";
 import DashCategories from "../Pages/DashCategories/DashCategories.js";
 import DashClient from "../Pages/DashClient/DashClient.js";
-import DashColors from '../Pages/DashColors/DashColors.js'
+import DashColors from "../Pages/DashColors/DashColors.js";
 import DashDelivery from "../Pages/DashDelivery/DashDelivery.js";
+import Loading from "../Pages/Loading/Loading.js";
 
 const PrivatRoute = ({
   isAllowed,
@@ -46,7 +47,7 @@ const PrivatRoute = ({
           fontSize: "3rem",
         }}
       >
-        Loading...
+        <Loading />
       </div>
     );
   }
@@ -140,9 +141,9 @@ const AppRouter = () => {
           path="/dashboard/color"
           exact
           element={
-            <PrivatRoute 
-            element={<DashColors />} 
-            isAllowed={user && user.role === "Admin" ? true : false}
+            <PrivatRoute
+              element={<DashColors />}
+              isAllowed={user && user.role === "Admin" ? true : false}
             />
           }
         />

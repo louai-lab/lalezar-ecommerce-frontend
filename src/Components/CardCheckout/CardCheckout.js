@@ -242,7 +242,10 @@ export default function CardCheckout({ totalPrice, cartItems }) {
             <p>{language === "en" ? "Total Price" : "السعر النهائي"}</p>
             <div>${(totalPrice + selectedPrice).toFixed(2)}</div>
           </div>
-          <div className={styles.buttonContainer}>
+          <div
+            className={styles.buttonContainer}
+            style={{ textAlign: language === "ar" ? "end" : "" }}
+          >
             <Button
               type="submit"
               variant="contained"

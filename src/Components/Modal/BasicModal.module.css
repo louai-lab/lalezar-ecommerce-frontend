@@ -1,0 +1,10 @@
+.buttonStyle {
+    all: unset;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Smooth transition */
+  }
+  
+  .buttonStyle:hover {
+    opacity: 0.7; /* Adjust the opacity level as needed */
+  }
+  

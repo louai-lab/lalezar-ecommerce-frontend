@@ -1,7 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const ProfileDetails = ({ userData }) => {
+  const { language } = useLanguage();
+
   const formatDate = (date) => {
     const formattedDate = dayjs(date).format("DD-MM-YYYY");
     return formattedDate;
@@ -27,19 +30,20 @@ const ProfileDetails = ({ userData }) => {
         lineHeight="2.7rem"
         borderBottom="1px solid rgba(0, 0, 0, 0.12)"
       >
-        <span
+        <p
           style={{
             paddingLeft: "1rem",
             paddingRight: "1rem",
             color: "#C86823",
             borderBottom: "2px solid #C86823",
-            display: "flex",
+            // display: "flex",
             height: "100%",
-            width: "fit-content",
+            // width: "fit-content",
+            textAlign: language === "ar" ? "right" : "left", // Conditional text alignment
           }}
         >
-          User Details
-        </span>
+          {language === "en" ? "User Details" : "بيانات المستخدم"}
+        </p>
       </Typography>
       <Stack>
         <Typography
@@ -49,13 +53,19 @@ const ProfileDetails = ({ userData }) => {
           mb="1.2rem"
           mt="1rem"
           pl="1rem"
+          sx={{
+            display: language === "ar" ? "flex" : "initial",
+            flexDirection: language === "ar" ? "row-reverse" : "initial",
+            columnGap: language === "ar" ? "5px" : "initial",
+            pr: language === "ar" ? "1rem" : "0",
+          }}
         >
           <span
             style={{
               fontWeight: "600",
             }}
           >
-            First Name :{" "}
+            {language === "en" ? "First Name :" : ": الإسم الأول"}{" "}
           </span>{" "}
           {userData && userData.firstName}
         </Typography>
@@ -66,13 +76,19 @@ const ProfileDetails = ({ userData }) => {
           mb="1.2rem"
           mt="1rem"
           pl="1rem"
+          sx={{
+            display: language === "ar" ? "flex" : "initial",
+            flexDirection: language === "ar" ? "row-reverse" : "initial",
+            columnGap: language === "ar" ? "5px" : "initial",
+            pr: language === "ar" ? "1rem" : "0",
+          }}
         >
           <span
             style={{
               fontWeight: "600",
             }}
           >
-            Last Name :{" "}
+            {language === "en" ? "Last Name :" : ": الإسم الأخير"}{" "}
           </span>{" "}
           {userData && userData.lastName}
         </Typography>
@@ -83,13 +99,19 @@ const ProfileDetails = ({ userData }) => {
           mb="1.2rem"
           mt="1rem"
           pl="1rem"
+          sx={{
+            display: language === "ar" ? "flex" : "initial",
+            flexDirection: language === "ar" ? "row-reverse" : "initial",
+            columnGap: language === "ar" ? "5px" : "initial",
+            pr: language === "ar" ? "1rem" : "0",
+          }}
         >
           <span
             style={{
               fontWeight: "600",
             }}
           >
-            Email :{" "}
+            {language === "en" ? "Email :" : ": البريد الإلكتروني"}{" "}
           </span>{" "}
           {userData && userData.email}
         </Typography>
@@ -100,13 +122,19 @@ const ProfileDetails = ({ userData }) => {
           mb="1.2rem"
           mt="1rem"
           pl="1rem"
+          sx={{
+            display: language === "ar" ? "flex" : "initial",
+            flexDirection: language === "ar" ? "row-reverse" : "initial",
+            columnGap: language === "ar" ? "5px" : "initial",
+            pr: language === "ar" ? "1rem" : "0",
+          }}
         >
           <span
             style={{
               fontWeight: "600",
             }}
           >
-            Phone :{" "}
+            {language === "en" ? "Phone :" : ": رقم الهاتف"}{" "}
           </span>{" "}
           {userData && userData.phoneNumber}
         </Typography>
@@ -117,13 +145,19 @@ const ProfileDetails = ({ userData }) => {
           mb="1.2rem"
           mt="1rem"
           pl="1rem"
+          sx={{
+            display: language === "ar" ? "flex" : "initial",
+            flexDirection: language === "ar" ? "row-reverse" : "initial",
+            columnGap: language === "ar" ? "5px" : "initial",
+            pr: language === "ar" ? "1rem" : "0",
+          }}
         >
           <span
             style={{
               fontWeight: "600",
             }}
           >
-            Joined Since:{" "}
+            {language === "en" ? "Joined Since :" : ": إنضم منذ"}{" "}
           </span>{" "}
           {userData && formatDate(userData.createdAt)}
         </Typography>

@@ -67,7 +67,9 @@
 }
 
 .titleAR {
-  text-align: end;
+  text-align: right;
+  color: #c86823;
+  font-weight: bold;
 }
 
 .msgUs {
@@ -143,6 +145,10 @@
   width: 100%;
   height: 100%;
   /* margin-top: 0; */
+}
+
+.contactAr {
+  align-items: end;
 }
 
 .inputsHolder {
@@ -362,5 +368,10 @@
     width: 90%;
     margin: 1rem auto;
     text-align: left;
+  }
+  .titleAR {
+    width: 90%;
+    margin: 1rem auto;
+    text-align: right;
   }
 }

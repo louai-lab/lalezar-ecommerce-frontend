@@ -114,7 +114,7 @@ export default function Blogs() {
                 language === "ar" ? Styles.latestPostsAR : ""
               }`}
             >
-              {language === "en" ? "Latest Posts:" : "آخر المشاركات:"}
+              {language === "en" ? "Latest Posts:" : ": آخر المشاركات"}
             </h2>
             <section className={Styles.blogsCardContainer}>
               {blogData &&

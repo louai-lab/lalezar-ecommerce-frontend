@@ -76,13 +76,21 @@ const AboutUs = () => {
         <div className={language === "en" ? Styles.top : Styles.topAr}>
           <div className={Styles.topLeft}>
             <p className={Styles.aboveTitle}></p>
-            <h1 className={Styles.title}>
+            <h1
+              className={`${Styles.title} ${
+                language === "en" ? "" : Styles.titleAr
+              }`}
+            >
               {language === "en" ? "Let's get to know" : "دعونا نتعرف على"}{" "}
               <span className={Styles.titleSpan}>
                 {language === "en" ? "Lalezar" : "لاليزار"}
               </span>{" "}
             </h1>
-            <section className={`${Styles.section} ${Styles.description}`}>
+            <section
+              className={`${Styles.section} ${Styles.description} ${
+                language === "en" ? "" : Styles.descriptionAr
+              }`}
+            >
               <strong>{language === "en" ? "LALEZAR" : " لاليزار"}</strong>
               {language === "en"
                 ? ` , Since its inception in 2019, Lalezar
@@ -176,7 +184,9 @@ const AboutUs = () => {
               </svg>
             </span>
             <span className={Styles.quoteText}>
-              We have made many people satisfied with our Platform
+              {language === "en"
+                ? `We have made many people satisfied with our Platform`
+                : `لقد جعلنا العديد من الأشخاص راضين عن منصتنا.`}
             </span>
             <span className={Styles.quoteSvgg2}>
               <svg
@@ -198,7 +208,13 @@ const AboutUs = () => {
         <div className={Styles.info}>
           <Info />
         </div>
-        <h1 className={Styles.title}>Where to find us?</h1>
+        <h1
+          className={`${Styles.title} ${
+            language === "en" ? "" : Styles.titleAr
+          }`}
+        >
+          {language === "en" ? "Where to find us?" : "أين تجدنا؟"}
+        </h1>
         <Location />
       </div>
     </>

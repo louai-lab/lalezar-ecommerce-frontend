@@ -9,6 +9,7 @@ import ProfileDetails from "../../Components/ProfileDetails/ProfileDetails";
 import EditProfile from "../../Components/EditProfile/EditProfile";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../Utils/AxiosInstance";
+import Loading from "../Loading/Loading";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
@@ -89,7 +90,9 @@ const ProfilePage = () => {
           justifyContent: "center",
         }}
       >
-        <h1>Loading ...</h1>
+        <h1>
+          <Loading />
+        </h1>
       </div>
     );
   }
@@ -165,7 +168,6 @@ const ProfilePage = () => {
               display: "flex",
               flexDirection: flex,
               columnGap: "10%",
-              
             }}
           >
             {user && user.role === "Customer" ? (

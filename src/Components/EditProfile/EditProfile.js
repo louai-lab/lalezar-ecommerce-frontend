@@ -19,6 +19,7 @@ import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Styles from "./EditProfile.module.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const EditProfile = ({ userData, refetchUser }) => {
   const [firstName, setFirstName] = useState(userData && userData.firstName);
@@ -36,6 +37,8 @@ const EditProfile = ({ userData, refetchUser }) => {
   const [display, setDisplay] = useState(screenWidth < 900 ? "column" : "row");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { language } = useLanguage();
 
   useEffect(() => {
     const handleResize = () => {
@@ -224,8 +227,8 @@ const EditProfile = ({ userData, refetchUser }) => {
               <TextField
                 required
                 id="outlined-required1"
-                label="FirstName"
-                placeholder="FirstName"
+                label={language === "en" ? "FirstName" : "الإسم الأول"}
+                placeholder={language === "en" ? "FirstName" : "الإسم الأول"}
                 name="firstName"
                 onChange={handleChange}
                 value={firstName}
@@ -234,8 +237,8 @@ const EditProfile = ({ userData, refetchUser }) => {
               <TextField
                 required
                 id="outlined-required2"
-                label="LastName"
-                placeholder="LastName"
+                label={language === "en" ? "LastName" : "الإسم الأخير"}
+                placeholder={language === "en" ? "LastName" : "الإسم الأخير"}
                 name="lastName"
                 onChange={handleChange}
                 value={lastName}
@@ -244,8 +247,8 @@ const EditProfile = ({ userData, refetchUser }) => {
               <TextField
                 required
                 id="outlined-required3"
-                label="Email"
-                placeholder="Email"
+                label={language === "en" ? "Email" : "البريد الإلكتروني"}
+                placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
                 name="email"
                 onChange={handleChange}
                 value={email}
@@ -254,8 +257,8 @@ const EditProfile = ({ userData, refetchUser }) => {
               <TextField
                 required
                 id="outlined-required3"
-                label="Phone"
-                placeholder="Phone Number"
+                label={language === "en" ? "Phone" : "الهاتف"}
+                placeholder={language === "en" ? "Phone" : "الهاتف"}
                 name="phoneNumber"
                 onChange={handleChange}
                 value={phoneNumber}
@@ -280,7 +283,7 @@ const EditProfile = ({ userData, refetchUser }) => {
                       type="submit"
                       startIcon={<EditIcon />}
                     >
-                      Submit
+                      {language === "en" ? "Save" : "حفظ"}
                     </Button>
                   </span>
                 </>
@@ -326,7 +329,7 @@ const EditProfile = ({ userData, refetchUser }) => {
               </FormControl>
               <FormControl sx={{ m: 1, width: "20ch" }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password1">
-                  Old Password*
+                  {language == "en" ? "Old Password*" : "كلمة المرور القديمة"}
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password1"
@@ -351,7 +354,7 @@ const EditProfile = ({ userData, refetchUser }) => {
               </FormControl>
               <FormControl sx={{ m: 1, width: "20ch" }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password2">
-                  New Password*
+                  {language == "en" ? "New Password*" : "كلمة المرور الجديدة"}
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password2"
@@ -414,7 +417,7 @@ const EditProfile = ({ userData, refetchUser }) => {
                       size="large"
                       startIcon={<EditIcon />}
                     >
-                      Submit
+                      {language === "en" ? "Save" : "حفظ"}
                     </Button>
                   )}
                 </span>

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Styles from "./BasicModal.module.css";
 
 const style = {
   position: "absolute",
@@ -25,7 +26,12 @@ export default function BasicModal({ handleDeleteComment }) {
   return (
     <div>
       {/* <Button onClick={handleOpen}>Delete</Button> */}
-      <button type="button" onClick={handleOpen} style={{ all: "unset" }}>
+      <button
+        type="button"
+        onClick={handleOpen}
+        // style={{ all: "unset", cursor: "pointer" }}
+        className={Styles.buttonStyle}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={25}

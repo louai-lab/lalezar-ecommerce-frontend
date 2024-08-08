@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Stack, Avatar, Typography } from "@mui/material";
 import styles from "./ProfileCard.module.css";
 import PersonIcon from "@mui/icons-material/Person";
+import { useLanguage } from "../../Utils/LanguageContext";
 
 const ProfileCard = ({
   handleOverview,
@@ -11,6 +12,8 @@ const ProfileCard = ({
   userData,
 }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const { language } = useLanguage();
 
   useEffect(() => {
     const handleResize = () => {
@@ -94,23 +97,36 @@ const ProfileCard = ({
           >
             <PersonIcon />
             <Typography variant="body1" component="p">
-              {userData && userData.role}
+              {userData
+                ? language === "en"
+                  ? userData.role === "Customer"
+                    ? "Customer"
+                    : "Admin"
+                  : userData.role === "Customer"
+                  ? "زبون"
+                  : "أدمن"
+                : ""}
             </Typography>
           </span>
         </Stack>
       </Stack>
-      <Stack mb="0px" ml="1rem" flexDirection="row">
+      <Stack
+        mb="0px"
+        ml="1rem"
+        flexDirection="row"
+        style={{ justifyContent: language === "ar" ? "end" : "" }}
+      >
         <span
           className={`${styles.Span} ${overview ? styles.ActiveSpan : ""}`}
           onClick={handleOverview}
         >
-          Overview
+          {language === "en" ? "Overview" : "ملخص"}
         </span>
         <span
           className={`${styles.Span} ${edit ? styles.ActiveSpan : ""}`}
           onClick={handleEdit}
         >
-          Edit
+          {language === "en" ? "Edit" : "تعديل"}
         </span>
       </Stack>
     </Box>
