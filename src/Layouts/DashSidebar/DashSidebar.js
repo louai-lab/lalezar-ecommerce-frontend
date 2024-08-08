@@ -110,7 +110,7 @@ const DashSidebar = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
           height: "90vh",
           color: "white",
         }}

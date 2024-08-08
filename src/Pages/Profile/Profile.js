@@ -19,7 +19,7 @@ const ProfilePage = () => {
   const [successEdit, setSuccessEdit] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // console.log(user);
+  console.log(user);
 
   useEffect(() => {
     const handleOffline = () => {
@@ -61,10 +61,10 @@ const ProfilePage = () => {
     queryKey: ["UserData"],
     queryFn: async () => {
       try {
-        if (user !== null) {
+        if (user) {
           const response = await axiosInstance.post(
             `${process.env.REACT_APP_BACKEND_ENDPOINT}user/byId`,
-            { id: user.id }
+            { id: user?.id }
           );
           return response.data;
         } else {
