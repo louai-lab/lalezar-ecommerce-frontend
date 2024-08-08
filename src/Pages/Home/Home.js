@@ -271,9 +271,13 @@ const Home = () => {
                 <BlogCard
                   key={index}
                   title={item.title_en}
+                  title_ar={item.title_ar}
                   image={item.image}
                   description={item.description_en}
+                  description_ar={item.description_ar}
                   slug={item.slug}
+                  // key={index}
+                  // element={item}
                 />
               );
             })

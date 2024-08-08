@@ -1,16 +1,30 @@
 import { Button } from "@mui/material";
 import Styles from "./BlogCard.module.css";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../Utils/LanguageContext";
 
-const BlogCard = ({ title, image, description, slug }) => {
+const BlogCard = ({
+  title,
+  title_ar,
+  image,
+  description,
+  description_ar,
+  slug,
+}) => {
   const navigate = useNavigate();
+
+  const { language } = useLanguage();
 
   // console.log(image);
 
   const createMarkup = () => {
     // Split the description into words
-    const words = description.split(" ");
+    // const words = description.split(" ");
 
+    const desc = language === "ar" ? description_ar : description;
+
+    // Split the description into words
+    const words = desc.split(" ");
     // Take the first 4 words
     const truncatedWords = words.slice(0, 6);
 
@@ -33,20 +47,27 @@ const BlogCard = ({ title, image, description, slug }) => {
       />
       <div className={Styles.bottom}>
         <span className={Styles.bottomFirst}>
-          <h3 className={Styles.title}>{title}</h3>
+          <h3 className={Styles.title}>
+            {language === "en" ? title : title_ar}
+          </h3>
           <span className={Styles.btn1}>
             <Button
               onClick={() => navigate(`/blogs/${slug}`)}
               sx={{
-                bgcolor: "#c86823",
+                bgcolor: "var(--color1)",
                 color: "white",
                 border: "1.5px solid transparent",
-                ":hover": {
-                  border: "1.5px solid #c86823",
+                transition: "opacity 0.3s ease-in-out",
+                // ":hover": {
+                //   border: "1.5px solid #c86823",
+                // },
+                "&:hover": {
+                  opacity: 0.7,
+                  bgcolor: "var(--color1)",
                 },
               }}
             >
-              Read more
+              {language === "en" ? "Read more" : "اقرأ المزيد"}
             </Button>
           </span>
         </span>
@@ -58,15 +79,20 @@ const BlogCard = ({ title, image, description, slug }) => {
           <Button
             onClick={() => navigate(`/blogs/${slug}`)}
             sx={{
-              bgcolor: "#c86823",
+              bgcolor: "var(--color1)",
               color: "white",
               border: "1.5px solid transparent",
-              ":hover": {
-                border: "1.5px solid #c86823",
+              transition: "opacity 0.3s ease-in-out",
+              // ":hover": {
+              //   border: "1.5px solid #c86823",
+              // },
+              "&:hover": {
+                opacity: 0.7,
+                bgcolor: "var(--color1)",
               },
             }}
           >
-            Read more
+            {language === "en" ? "Read more" : "اقرأ المزيد"}
           </Button>
         </span>
       </div>

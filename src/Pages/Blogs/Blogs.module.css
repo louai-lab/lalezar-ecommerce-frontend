@@ -74,6 +74,7 @@
 
 .continueContainer {
   display: flex;
+  column-gap: 10px;
   justify-content: space-between;
   width: 100%;
   align-items: center;
@@ -98,6 +99,7 @@
 .blogsCardContainer {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
   width: 90%;
   margin: auto;
@@ -120,11 +122,12 @@
   cursor: pointer;
   /* margin: 20px auto 100px auto; */
   width: fit-content;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 10px 20px;
   font-size: 1.2em;
   border: 1px solid gray;
   transition: opacity 0.3s ease;
+  display: flex;
 }
 
 .viewMoreButton:hover {
