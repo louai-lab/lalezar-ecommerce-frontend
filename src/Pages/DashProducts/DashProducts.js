@@ -942,9 +942,6 @@ function DashProducts() {
               >
                 Are you sure to Delete this Product?
               </Typography>
-              {/* <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography> */}
               <div
                 style={{
                   display: "flex",

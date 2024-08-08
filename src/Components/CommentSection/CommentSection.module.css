@@ -184,3 +184,8 @@
     height: 50px;
   }
 }
+
+.containerDelete{
+  display: flex;
+  justify-content: space-between;
+}

@@ -88,7 +88,11 @@ export default function BlogDetails() {
             ""
           )}
 
-          <CommentSection initialComments={data.comments} blogId={blogId} />
+          <CommentSection
+            key={data?._id}
+            initialComments={data?.comments}
+            blogId={blogId}
+          />
         </main>
       ) : isPending ? (
         <p>loading...</p>
